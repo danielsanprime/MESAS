@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DANIEL SAN PRIME</title>
+<style>
+body{margin:0;font-family:Arial;background:#111;color:#fff}
+header{background:#000;padding:15px;text-align:center;font-weight:bold;font-size:18px;position:sticky;top:0}
+.tabs{display:flex;overflow-x:auto;background:#1c1c1c}
+.tabs button{flex:none;padding:12px 16px;border:none;background:none;color:#fff;font-size:14px}
+.tabs button:hover{background:#333}
+.container{padding:12px}
+.section{margin:18px 0}
+.section h3{color:#ffcc00;margin-bottom:8px}
+.item{background:#1f1f1f;margin-bottom:8px;padding:12px;border-radius:8px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.desc{font-size:12px;color:#bbb}
+.controls{display:flex;align-items:center;gap:10px}
+.controls button{background:#28a745;border:none;color:#fff;padding:10px 14px;border-radius:8px;font-size:18px}
+.qty{min-width:24px;text-align:center;font-size:16px}
+</style>
+<style>
+#ds_order_btn{
+background:#555;
+color:#fff;
+transition:0.2s;
+}
+#ds_order_btn.active{
+background:#3BAF75 !important;
+}
+</style>
+
+
+<style>
+.item{position:relative;padding-left:90px}
+.item .thumb{position:absolute;left:10px;top:10px;width:70px;height:70px;border-radius:10px}
+</style>
+
+
+<style>
+.item{padding:0 10px 14px 10px !important;border-bottom:1px solid #1a1a1a;text-align:center}
+.item .thumb{position:relative;left:auto;top:auto;width:100%;height:190px;border-radius:14px;margin:8px 0;background-size:cover}
+.item b{display:block;font-size:16px;color:#f1d28a;margin-top:6px}
+.desc{display:block;color:#bfbfbf;font-size:12px;margin:4px 0 10px 0}
+.controls{justify-content:center}
+</style>
+
+
+<style>
+.item button:not(#menos):not(#mais):not(#addBtn){display:none!important}
+.controls{display:none!important}
+</style>
+
+<style>
+.item img, .thumb, .card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:14px;
+}
+</style>
+
+
+<style>
+.item{
+  margin-bottom:18px;
+}
+
+.item img,
+.item .thumb{
+  width:100% !important;
+  height:200px !important;
+  display:block !important;
+  object-fit:cover !important;
+  border-radius:16px !important;
+}
+
+.item > div:first-child{
+  width:100%;
+  height:200px;
+  overflow:hidden;
+  border-radius:16px;
+}
+</style>
+
+
+<style>
+.item img,
+.item .thumb{
+  width:170px !important;
+  height:170px !important;
+  object-fit:cover !important;
+  border-radius:18px !important;
+  box-shadow:0 8px 18px rgba(0,0,0,0.45), 0 2px 6px rgba(0,0,0,0.35) !important;
+  margin:0 auto 8px auto !important;
+  display:block !important;
+}
+
+.item{
+  text-align:center;
+}
+</style>
+
+
+<style>
+
+.item{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  text-align:center !important;
+  margin-bottom:22px !important;
+}
+
+/* Force all image containers to same size */
+.item img,
+.item .thumb{
+  width:170px !important;
+  height:170px !important;
+  min-width:170px !important;
+  min-height:170px !important;
+  max-width:170px !important;
+  max-height:170px !important;
+  object-fit:cover !important;
+  border-radius:18px !important;
+  box-shadow:0 8px 18px rgba(0,0,0,0.45) !important;
+  display:block !important;
+  margin:0 auto 10px auto !important;
+}
+
+/* Remove any conflicting inline spacing */
+.item > *{
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
+</style>
+
+
+<style>
+.tabs, .categorias, .categories {position:sticky; top:64px; background:#000; z-index:999;}
+body{padding-bottom:120px}
+</style>
+
+<style>
+#topoFixo{padding:8px 6px !important}
+.tabs, .categorias, .categories{top:56px !important; margin-top:0 !important}
+.section:first-of-type{margin-top:0 !important}
+</style>
+
+
+<style>
+.tabs button,
+.categorias button,
+.categories button{
+    padding:14px 18px !important;
+    font-size:15px !important;
+    font-weight:600 !important;
+}
+
+.tabs, .categorias, .categories{
+    height:auto !important;
+}
+</style>
+
+
+<style>
+body{background:#f1ede6 !important;color:#1a1a1a !important}
+#topoFixo{background:#f1ede6 !important;border-bottom:1px solid #d6d0c6 !important}
+.tabs, .categorias, .categories{background:#f1ede6 !important;border-bottom:1px solid #d6d0c6}
+.item{background:#ffffff !important;border-radius:18px;padding:12px;margin-bottom:16px}
+.item b{color:#111 !important}
+.desc{color:#555 !important}
+</style>
+
+
+<style>
+/* gold tone */
+:root{--gold:#B8860B}
+
+/* tabs text gold */
+.tabs button, .categorias button, .categories button{
+  color:var(--gold) !important;
+}
+
+/* active tab underline */
+.tabs button.active{
+  border-bottom:3px solid var(--gold) !important;
+}
+
+/* item name and qty color */
+.item b, #count{
+  color:var(--gold) !important;
+  font-weight:700;
+}
+
+/* send button keep gold */
+#sendBtn, #bar button{
+  background:var(--gold) !important;
+  color:#000 !important;
+}
+</style>
+
+
+<style>
+/* keep active tab visible */
+.tabs button.active, .categorias button.active, .categories button.active{
+  background:rgba(202,168,90,0.15) !important;
+  color:#000 !important;
+}
+
+/* prevent black background on click/focus */
+.tabs button:focus, .tabs button:active,
+.categorias button:focus, .categorias button:active,
+.categories button:focus, .categories button:active{
+  background:rgba(202,168,90,0.15) !important;
+  color:#000 !important;
+  outline:none !important;
+}
+
+/* item title below gold */
+.item b{ color:#B8860B !important; }
+</style>
+
+
+<style>
+/* quantity number inside selector */
+#mqty, #qv{
+  color:#ffffff !important;
+  font-weight:700;
+}
+
+/* ensure item names in list are gold */
+.item b, .cart-item-name, #bar span{
+  color:#B8860B !important;
+}
+</style>
+
+
+<style>
+#bar, .bar, .footer, .rodape{
+  display:none !important;
+}
+</style>
+
+
+<style>
+#ds_modal,#ds_review{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:9999}
+.ds_box{background:#fff;padding:20px;border-radius:16px;width:90%;max-width:420px}
+.ds_qty{display:flex;justify-content:center;align-items:center;margin:20px 0}
+.ds_qty button{width:40px;height:40px;font-size:20px}
+.ds_confirm{background:#3BAF75;color:#fff;border:none;padding:12px;border-radius:10px;width:100%;font-weight:800}
+.ds_del{background:#d64545;color:#fff;border:none;padding:6px 10px;border-radius:8px}
+#ds_float{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#B8860B;color:#000;padding:14px 22px;border:none;border-radius:16px;font-weight:800;display:none;z-index:9999}
+.ds_row{display:flex;justify-content:space-between;align-items:center;margin:10px 0}
+</style>
+
+<style>
+.ds_qty{gap:14px}
+#ds_num{min-width:40px;text-align:center;font-weight:800}
+</style>
+
+
+<style>
+.ds_qty button:first-child{background:#d64545;color:#fff;border:none;border-radius:10px}
+.ds_qty button:last-child{background:#3BAF75;color:#fff;border:none;border-radius:10px}
+.ds_confirm{background:#3BAF75 !important}
+</style>
+
+
+<style>
+/* categories in red */
+.tabs a, .tab, .categoria, nav a{ color:#c62828 !important; }
+</style>
+
+
+<style>
+/* Force category section titles to red */
+h2, h3, .category-title, .categoria-titulo, .section-title {
+    color: #c62828 !important;
+}
+</style>
+
+
+<style>
+h2, h3, .category-title, .categoria-titulo, .section-title {
+    color: #000 !important;
+}
+</style>
+
+
+<style>
+h2, h3, .category-title, .categoria-titulo, .section-title {
+    text-align: center !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px;
+}
+</style>
+
+
+<style>
+body{background:#F7F7F5 !important;color:#1C1C1C !important}
+.item,.card,.produto{background:#FFFFFF !important;color:#1C1C1C !important;box-shadow:0 4px 10px rgba(0,0,0,.08) !important;border-radius:14px}
+h1,h2,h3{color:#1C1C1C !important}
+.ds_confirm{background:#B8860B !important;color:#fff !important}
+#ds_float{background:#B8860B !important;color:#fff !important}
+a,.active{color:#B8860B !important}
+</style>
+
+</head>
+<body>
+<header id="topoFixo" style="position:sticky;top:0;background:#000;padding:10px 8px;text-align:center;z-index:1000;border-bottom:1px solid #222">
+  <div style="font-size:20px;font-weight:700;letter-spacing:3px">DANIEL SAN PRIME</div>
+  <div style="font-size:14px;margin-top:2px">MESA</div>
+</header>
+
+<header id="title">DANIEL SAN PRIME</header>
+<div class="tabs">
+<button onclick="load('entradas')">ENTRADAS</button>
+<button onclick="load('sashimis')">SASHIMIS</button>
+<button onclick="load('sushis')">SUSHIS</button>
+<button onclick="load('temakis')">TEMAKIS</button>
+<button onclick="load('quentes')">PRATOS QUENTES</button>
+<button onclick="load('sobremesas')">SOBREMESAS</button>
+</div>
+<div class="container" id="menu"></div>
+
+<script>
+const params=new URLSearchParams(location.search);
+const mesa=params.get("mesa")||"01";
+document.getElementById("title").innerText="DANIEL SAN PRIME - MESA "+mesa;
+
+let pedido={};
+function linha(nome,desc){
+let q=pedido[nome]||0;
+return `<div class="item">
+<div><b>${nome}</b><div class="desc">${desc}</div></div>
+<div class="controls">
+<button onclick="alt('${nome}',-1)">-</button>
+<div class="qty" id="q_${nome}">${q}</div>
+<button onclick="alt('${nome}',1)">+</button>
+</div></div>`
+}
+function alt(nome,v){
+pedido[nome]=(pedido[nome]||0)+v;
+if(pedido[nome]<0)pedido[nome]=0;
+document.getElementById('q_'+nome).innerText=pedido[nome];
+}
+
+const data={
+
+quentes:`
+<div class="section"><h3>Frango</h3>
+${linha('Frango Xadrez','Frango em cubos no molho especial com pimentão, cebola e amêndoas (250g) e arroz (200g)')}
+</div>
+
+<div class="section"><h3>Yakisoba</h3>
+${linha('Yakisoba Legumes','Macarrão e legumes 700g')}
+${linha('Yakisoba Frango','Macarrão, legumes e frango 700g')}
+${linha('Yakisoba Filé Mignon','Macarrão, legumes e filé mignon 700g')}
+${linha('Yakisoba Camarão','Macarrão, legumes e camarão 700g')}
+${linha('Yakisoba Misto','Macarrão, legumes, frango e carne 700g')}
+</div>
+
+<div class="section"><h3>Teppan</h3>
+${linha('Teppan Salmão','Salmão grelhado (200g), arroz (200g), legumes na manteiga (250g)')}
+${linha('Teppan Anchova','Anchova grelhada (200g), arroz (200g), legumes na manteiga (250g)')}
+${linha('Teppan Camarão','Camarão grelhado (200g), arroz (200g), legumes na manteiga (250g)')}
+${linha('Teppan Polvo','Polvo grelhado (200g), arroz (200g), legumes na manteiga (250g)')}
+${linha('Teppan Filé Mignon','Filé mignon grelhado com requeijão (200g), arroz (200g), legumes na manteiga (250g)')}
+${linha('Teppan Picanha','Picanha grelhada (200g), arroz (200g), legumes na manteiga (250g)')}
+${linha('Teppan Lula','Lula grelhada (200g), arroz (200g), legumes na manteiga (250g)')}
+${linha('Teppan Shiitake','Shiitake na manteiga (200g), arroz (200g), legumes na manteiga (250g)')}
+${linha('Teppan Shimeji','Shimeji na manteiga (200g), arroz (200g), legumes na manteiga (250g)')}
+${linha('Teppan do Cliente','Escolha até 3 proteínas: camarão, salmão, shimeji, shiitake e lula (200g), arroz (200g) e legumes na manteiga (250g)')}
+</div>
+`,
+sobremesas:`
+<div class="section"><h3>Sobremesas</h3>
+${linha('Infinity Prime','1 bola de sorvete com calda, massa crocante e doce de leite')}
+${linha('Harumaki de Sticadinho','Harumaki com chocolate sticadinho')}
+${linha('Harumaki de Chocolate','Harumaki de doce de leite com chocolate')}
+${linha('Harumaki Confeitos','Harumaki de doce de leite com chocolate e confeitos')}
+${linha('Harumaki de Goiabada','Goiabada com doce de leite, cream cheese e raspas de limão')}
+${linha('Docinho Prime','Doce de leite com chocolate empanado com fruta')}
+${linha('Goiabinha com Amêndoas','Goiabada com cream cheese e lâminas de amêndoas')}
+${linha('Prestígio Prime','Doce de leite com chocolate empanado no coco')}
+${linha('Mestre Aladin','Harumaki com doce de leite e abacaxi')}
+${linha('Bananinha com Sorvete','Banana empanada frita com sorvete')}
+${linha('Bananinha com Creme de Avelã','Banana empanada com creme de avelã')}
+${linha('Bananinha com Doce de Leite','Banana empanada com doce de leite')}
+${linha('Café Expresso','Café expresso')}
+</div>
+`,
+
+
+sushis:`<div class="section"><h3>Hossomaki</h3>
+${linha('Kappamaki','Nori, arroz e pepino')}
+${linha('Sakemaki','Nori, arroz e salmão')}
+${linha('Kanimaki','Nori, arroz e kanikama')}
+${linha('Kapasake','Nori, arroz, salmão e pepino')}
+${linha('Tekkamaki','Nori, arroz e atum')}
+${linha('Sake','Arroz e salmão')}
+${linha('Atum','Arroz e atum')}
+${linha('Shiromi','Arroz e peixe branco')}
+${linha('Kani','Arroz e kanikama')}
+${linha('Skin','Arroz e pele de salmão')}
+${linha('Polvo','Arroz e polvo')}
+</div>
+<div class="section"><h3>Hot Roll</h3>
+${linha('Hot Roll Light','Salmão, cream cheese e tarê')}
+${linha('Hot Roll','Arroz, salmão, cream cheese e tarê')}
+${linha('Hot Couve','Arroz, salmão, cream cheese, crisp de couve e tarê')}
+${linha('Hot Poró','Arroz, salmão, cream cheese, crisp de alho poró e tarê')}
+${linha('Hot Temperado','Arroz, salmão, cream cheese, pimenta sriracha e tarê')}
+${linha('Hot Batatitos','Arroz, salmão, cream cheese, crisp de batata e tarê')}
+${linha('Hot Atum','Arroz, salmão, cream cheese, atum grelhado e pimenta sriracha')}
+${linha('Hot Prego','Arroz, salmão, cream cheese, prego grelhado e tarê')}
+${linha('Hot Shimeji','Arroz, salmão, cream cheese, shimeji e tarê')}
+${linha('Hot Ebi Grill','Arroz, salmão, cream cheese, camarão grelhado, raspas de limão, pimenta sriracha e tarê')}
+${linha('Hot Camarão','Arroz, salmão, cream cheese, camarão empanado, tarê, raspas de limão e pimenta sriracha')}
+${linha('Hot Cebolitos','Arroz, salmão, cream cheese, crisp de batata e tarê')}
+${linha('Ebi','Arroz e camarão')}
+${linha('Sake Maçaricado','Arroz, salmão maçaricado e molho especial')}
+${linha('Ebi Scorpion','Arroz temperado, camarão empanado e molho especial')}
+${linha('Prego Maçaricado com Caviar','Arroz, prego maçaricado, cream cheese, tarê e caviar')}
+</div>
+<div class="section"><h3>Seleção Especial</h3>
+${linha('Hakusai','Enrolado de alga com arroz, salmão e molho tarê')}
+${linha('Spice Hakusai','Enrolado de alga com arroz, salmão apimentado')}
+${linha('Hot Hakusai','Enrolado de alga com arroz, salmão grelhado')}
+${linha('Daniel San à Moda','Enrolado de alga empanado com arroz, salmão e tarê')}
+${linha('Daniel San Grill','Enrolado de alga com cream cheese, arroz, pimenta sriracha e tarê')}
+${linha('Harumaki de Shimeji','Harumaki, arroz, shimeji e cream cheese')}
+</div>
+<div class="section"><h3>Nachos</h3>
+${linha('Nacho Sake','Salmão, cream cheese, caviar, cebola roxa, tarê e chips de batata doce')}
+${linha('Nacho Tuna','Atum, maionese, tarê, caviar e chips de batata doce')}
+${linha('Nacho Kani','Kani, cream cheese, caviar, cebola roxa e chips de batata doce')}
+${linha('Nacho White','Polvo, maionese, caviar, raspas de limão e chips de batata doce')}
+${linha('Nacho Ebi','Camarão, cream cheese, caviar, cebola roxa e chips de batata doce')}
+${linha('Nacho Polvo','Polvo, maionese, caviar, cebola roxa e chips de batata doce')}
+</div>
+<div class="section"><h3>Flambados</h3>
+${linha('Joe Flambado','Joe salmão')}
+${linha('Joe Ebi Flam','Arroz, salmão, cream cheese, camarão e tarê')}
+${linha('Joe Flam Especial','Joe prego, tarê, cream cheese e alho poró')}
+${linha('Ebi Flam','Salmão, cream cheese, camarão e tarê')}
+</div>
+<div class="section"><h3>Fusion</h3>
+${linha('Fusion Salmão','Salmão, camarão empanado, limão, cream cheese, tarê e pimenta')}
+${linha('Fusion White','Peixe branco, camarão empanado, limão, cream cheese, tarê e pimenta')}
+${linha('Fusion Grill','Salmão maçaricado, camarão empanado, limão, cream cheese, tarê e raspas de limão')}
+${linha('Fusion Tuna','Atum, camarão empanado, limão, cream cheese e tarê')}
+</div>
+<div class="section"><h3>Especialidades</h3>
+${linha('Lula Grill','Hossomaki de salmão, cream cheese e lula grelhada')}
+${linha('Lula San','Lula empanada, salmão, cream cheese e pimenta sriracha')}
+${linha('Lula Especial','Lula grelhada, salmão maçaricado, cream cheese, pimenta e raspas de limão')}
+${linha('Polvo Especial','Polvo, cream cheese, geleia de abacaxi com pimenta e lâminas de amêndoas')}
+${linha('Polvo c/ Shimeji','Shimeji com cream cheese e polvo')}
+${linha('Ebi Prego','Camarão empanado, filé prego e molho pesto')}
+${linha('Ebi Couve','Camarão, cream cheese, salmão maçaricado e crisp de couve')}
+${linha('Ebi Maçaricado','Arroz, salmão, camarão, cream cheese e molho especial')}
+${linha('Ebi Especial','Camarão empanado, cream cheese, salmão, tarê e raspas de limão')}
+${linha('Ebi Hakusai','Arroz, acelga, camarão, cream cheese, crisp de alho poró e tarê')}
+${linha('Ebi à Moda','Arroz enrolado na acelga, camarão, cream cheese e tarê')}
+${linha('Ebi Caviar','Salmão, camarão, cream cheese, caviar e molho especial')}
+${linha('Ebi Joe','Arroz, salmão, camarão, cream cheese e tarê')}
+${linha('Ebi Poró','Salmão, camarão, cream cheese, crisp de alho poró')}
+${linha('Joe Polvo c/ Gengibre','Salmão com gengibre e polvo')}
+${linha('Joe Polvo Especial','Salmão e cebolinha, polvo, raspa de limão e manga')}
+${linha('Joe Polvo e Shimeji','Arroz, polvo, shimeji, cream cheese e tarê')}
+${linha('Joe Ebi Polvo','Polvo, salmão, cream cheese, tarê, camarão e crisp de alho poró')}
+${linha('Joe Ebistic Roll','Camarão, cream cheese, nori e tarê')}
+${linha('Harumaki Especial','Massa harumaki, camarão, cream cheese, salmão, cebola roxa e tarê')}
+${linha('Harumaki Camarão','Massa harumaki, cream cheese e camarão')}
+${linha('Japan Joe','Camarão empanado, cream cheese, ricota japonesa, salmão e pimenta')}
+${linha('Kappa Polvo','Polvo com maionese, pepino e crisp de alho poró')}
+${linha('Kappa San','Camarão, cream cheese, pepino, tarê e raspas de limão')}
+${linha('Kappa Ebi Joe','Arroz, pepino, cream cheese, camarão, cebola roxa e tarê')}
+</div>
+`,
+temakis:`<div class="section"><h3>Temakis</h3>
+${linha('Skin','Nori, arroz, pele de salmão grelhada, tarê e cebolinha')}
+${linha('Salmão','Nori, arroz, salmão em cubos e cream cheese')}
+${linha('Shimeji','Nori, arroz, shimeji e cebolinha')}
+${linha('Hot','Nori, arroz, salmão grelhado empanado e cream cheese')}
+${linha('Salmão Grelhado','Nori, arroz, salmão grelhado, cream cheese e tarê')}
+${linha('Camarão','Nori, arroz, camarão grelhado ou empanado e cream cheese')}
+${linha('Califórnia','Nori, arroz, pepino, manga e kani')}
+${linha('Atum','Nori, arroz, atum e cream cheese')}
+${linha('Polvo','Nori, arroz, polvo em cubos e cream cheese')}
+</div>`,
+
+entradas:`
+<div class="section"><h3>Carpaccio</h3>
+${linha('Carpaccio Salmão','Salmão, gengibre, tarê e limão espremido')}
+${linha('Carpaccio Especial','Salmão, gengibre, tarê, limão espremido, rúcula e mostarda')}
+${linha('Carpaccio Peixe Branco','Peixe branco, limão e tarê')}
+${linha('Carpaccio Camarão ao Pesto','Camarão ao molho pesto, tarê e limão')}
+${linha('Carpaccio Polvo Trufado','Polvo com azeite trufado e limão')}
+${linha('Carpaccio do Chef','Atum, camarão, polvo, azeite trufado, gengibre e pimenta do reino')}
+</div>
+<div class="section"><h3>Tartar</h3>
+${linha('Tartar Salmão','Salmão, camarão, cream cheese, tarê e lâminas de amêndoas')}
+${linha('Tartar Frutos do Mar','Camarão, polvo, atum, cream cheese e pimenta sriracha')}
+${linha('Tartar Avocado','Salmão em cubos, abacate, tarê e crisp de alho poró')}
+${linha('Tartar do Chef','Salmão em cubos, arroz e cebola roxa')}
+${linha('Tartar Prime','Atum, caviar, gema de ovo e pimenta do reino')}
+</div>
+<div class="section"><h3>Ceviche</h3>
+${linha('Ceviche Salmão','Salmão, cebola roxa, pimenta biquinho e molho tarê')}
+${linha('Ceviche Havaiano','Camarão, cebola roxa, pimenta biquinho e frutas')}
+${linha('Ceviche Peruano','Saint peter, cebola roxa e pimenta')}
+${linha('Ceviche Peixe Branco','Peixe branco, cebola roxa e pimenta')}
+${linha('Ceviche Frutos do Mar','Atum, polvo, camarão e caviar com chips')}
+</div>
+<div class="section"><h3>Tradicionais</h3>
+${linha('Sunomono','Pepino japonês agridoce com gergelim')}
+${linha('Sunomono com Kani','Pepino agridoce com gergelim e kani')}
+${linha('Missoshiro','Caldo à base de soja, tofu e cebolinha')}
+${linha('Edamame','Soja verde na vagem com flor de sal')}
+</div>
+`,
+sashimis:`
+<div class="section"><h3>Trufados</h3>
+${linha('Salmão Trufado','Salmão com fatia de limão, azeite trufado e caviar')}
+${linha('White Trufado','Peixe branco com limão, azeite trufado e caviar')}
+${linha('Atum Trufado','Atum com limão, azeite trufado e caviar')}
+${linha('Polvo Trufado','Polvo com limão, azeite trufado e caviar')}
+</div>
+<div class="section"><h3>Especiais</h3>
+${linha('Sashimi Especial','Salmão com raspas de limão, tarê e gengibre')}
+${linha('Sashimi Nobre','Salmão marinado no molho especial com cream cheese e caviar')}
+${linha('Sashimi do Chef','Salmão com limão, tarê, gengibre e caviar')}
+</div>
+<div class="section"><h3>Tataki</h3>
+${linha('Tataki Salmão','Salmão selado levemente e molho tarê')}
+${linha('Tataki Prego Especial','Prego maçaricado, tarê e crisp de alho poró')}
+${linha('Tataki Atum','Atum levemente selado com tarê')}
+${linha('Tataki Especial','Salmão com cebola roxa e rúcula')}
+${linha('Tataki do Chef','Atum com gergelim e molho avocado')}
+${linha('Tataki Marinado','Salmão marinado no molho do chef e pimenta biquinho')}
+</div>
+`
+};
+
+function load(cat){document.getElementById("menu").innerHTML=data[cat];}
+load('entradas');
+</script>
+
+<div id="modal" style="position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:999">
+ <div style="background:#111;padding:25px;border-radius:18px;width:90%;max-width:340px;text-align:center">
+   <h3 id="mname" style="margin-top:0;color:#B8860B"></h3>
+   <div style="display:flex;gap:25px;justify-content:center;align-items:center;margin:20px 0">
+     <button id="menos" style="width:50px;height:50px;border-radius:14px;border:none;color:#fff;font-size:22px">-</button>
+     <div id="mqty" style="font-size:20px;font-weight:bold">1</div>
+     <button id="mais" style="width:50px;height:50px;border-radius:14px;border:none;color:#fff;font-size:22px">+</button>
+   </div>
+   <button id="addBtn" style="background:#B8860B;color:#000;border:none;padding:14px;border-radius:14px;width:100%;font-weight:bold">Adicionar à lista</button>
+ </div>
+</div>
+
+<div id="bar" style="position:fixed;bottom:0;left:0;right:0;background:#000;border-top:1px solid #222;padding:14px;display:flex;justify-content:space-between;align-items:center">
+ Seu pedido: <span id="count">0</span>
+ <button id="sendBtn" style="background:#B8860B;border:none;border-radius:14px;padding:12px 18px;font-weight:bold">Enviar à cozinha</button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('body *').forEach(el=>{
+    if(el.childNodes.length===1 && el.textContent.match(/MESA\s*\d+/i)){
+      el.remove();
+    }
+  });
+});
+</script>
+
+<div id="pedidoPanel" style="position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;z-index:2000;align-items:flex-end">
+  <div style="background:#fff;width:100%;max-height:70%;border-radius:18px 18px 0 0;padding:16px;overflow:auto">
+    <h3 style="margin-top:0">Seu pedido</h3>
+    <div id="pedidoLista"></div>
+    <button onclick="fecharPedido()" style="margin-top:10px;width:100%">Fechar</button>
+  </div>
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('*').forEach(el=>{
+    if(el.childNodes.length===1 && /itens/i.test(el.textContent.trim())){
+      el.textContent='Seu pedido';
+    }
+  });
+});
+</script>
+
+
+
+
+
+<div id="confirmPanel" style="position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:2000;align-items:flex-end">
+  <div style="background:#fff;width:100%;max-height:75%;border-radius:18px 18px 0 0;padding:16px;overflow:auto">
+    <h3>Revise seu pedido</h3>
+    <div id="confirmList"></div>
+    <button id="confirmSend" style="margin-top:10px;width:100%;background:#B8860B;border:none;padding:12px;border-radius:10px;font-weight:700">Confirmar envio</button>
+  </div>
+</div>
+
+
+<button id="ds_float">Seu pedido (0)</button>
+
+<div id="ds_modal"><div class="ds_box">
+<h3 id="ds_title"></h3>
+<div class="ds_qty">
+<button onclick="dsChange(-1)">-</button>
+<div id="ds_num">1</div>
+<button onclick="dsChange(1)">+</button>
+</div>
+<button class="ds_confirm" onclick="dsAdd()">Adicionar</button>
+</div></div>
+
+<div id="ds_review"><div class="ds_box">
+<h3>Revise seu pedido</h3>
+<div id="ds_list"></div>
+<button class="ds_confirm" onclick="dsSend()">Confirmar envio</button>
+</div></div>
+
+<script>
+(function(){
+if(typeof dsUpdate === "function"){
+const oldUpdate = dsUpdate;
+dsUpdate = function(){
+oldUpdate();
+try{
+var btn = document.getElementById("ds_order_btn");
+if(!btn) return;
+if(typeof dsCart !== "undefined" && dsCart.length>0){
+btn.classList.add("active");
+}else{
+btn.classList.remove("active");
+}
+}catch(e){}
+}
+}
+})();
+</script>
+
+
+
+
+
+<script>
+function slug(t){
+ return t.toLowerCase()
+ .normalize("NFD")
+ .replace(/[\u0300-\u036f]/g,"")
+ .replace(/[^a-z0-9]+/g,"-")
+ .replace(/(^-|-$)/g,"");
+}
+
+function carregarFotos(){
+ document.querySelectorAll(".item").forEach(item=>{
+
+  if(item.querySelector("img")) return;
+
+  let nameEl=item.querySelector("b")||item.querySelector(".title");
+  if(!nameEl) return;
+
+  let nome=nameEl.innerText.split("R$")[0].trim();
+  let file=slug(nome);
+
+  let img=document.createElement("img");
+  img.src="fotos/"+file+".jpg";
+
+  img.onerror=function(){
+   this.onerror=null;
+   this.src="fotos/"+file+".png";
+  };
+
+  img.style.width="100%";
+  img.style.height="170px";
+  img.style.objectFit="cover";
+  img.style.borderRadius="14px";
+  img.style.marginBottom="10px";
+
+  item.prepend(img);
+ });
+}
+
+document.addEventListener("DOMContentLoaded",carregarFotos);
+setInterval(carregarFotos,80);
+</script>
+
+</body>
+
+<script>
+let cart = [];
+let currentItem = "";
+let quantity = 1;
+
+document.addEventListener('click', function(e){
+  const item = e.target.closest('.item');
+  if(item && !e.target.closest('#modal')){
+    currentItem = (item.querySelector('b')?.innerText || 'Item');
+    quantity = 1;
+    document.getElementById('mqty').innerText = quantity;
+    document.getElementById('mname').innerText = currentItem;
+    document.getElementById('modal').style.display = 'flex';
+  }
+});
+
+document.getElementById('menos').addEventListener('click', function(e){
+  e.stopPropagation();
+  quantity = Math.max(1, quantity - 1);
+  document.getElementById('mqty').innerText = quantity;
+});
+
+document.getElementById('mais').addEventListener('click', function(e){
+  e.stopPropagation();
+  quantity++;
+  document.getElementById('mqty').innerText = quantity;
+});
+
+document.getElementById('addBtn').addEventListener('click', function(){
+  cart.push({name: currentItem, qty: quantity});
+  updateCart();
+  document.getElementById('modal').style.display = 'none';
+});
+
+document.getElementById('sendBtn').addEventListener('click', function(){
+  if(cart.length === 0){
+    alert('Nenhum item selecionado');
+    return;
+  }
+  alert('Pedido enviado para produção:\n' + cart.map(i => i.qty + 'x ' + i.name).join('\n'));
+  cart = [];
+  updateCart();
+});
+
+function updateCart(){
+  let total = 0;
+  cart.forEach(i => total += i.qty);
+  document.getElementById('count').innerText = total;
+}
+
+document.getElementById('modal').addEventListener('click', function(e){
+  if(e.target.id === 'modal'){
+    document.getElementById('modal').style.display = 'none';
+  }
+});
+</script>
+
+<script>
+function abrirPedido(){
+  if(!window.cart){return}
+  const lista=document.getElementById('pedidoLista');
+  lista.innerHTML='';
+  window.cart.forEach((i,idx)=>{
+    const div=document.createElement('div');
+    div.style.display='flex';
+    div.style.justifyContent='space-between';
+    div.style.margin='8px 0';
+    div.innerHTML='<span>'+i.qty+'x '+i.name+'</span><button onclick="removerItem('+idx+')">Excluir</button>';
+    lista.appendChild(div);
+  });
+  document.getElementById('pedidoPanel').style.display='flex';
+}
+function fecharPedido(){document.getElementById('pedidoPanel').style.display='none'}
+function removerItem(i){
+  window.cart.splice(i,1);
+  if(window.updateCart) updateCart();
+  abrirPedido();
+}
+document.getElementById('count')?.parentElement?.addEventListener('click',abrirPedido);
+</script>
+
+
+<script>
+function collectItems(){
+  const list=document.getElementById('confirmList');
+  list.innerHTML='';
+  const candidates=document.querySelectorAll('#bar li, .cart li, .pedido li, .order li, .list li');
+  if(candidates.length===0){ list.innerHTML='<em>Seu pedido está vazio</em>'; return; }
+  candidates.forEach((el)=>{
+    const txt=el.innerText.trim();
+    if(!txt) return;
+    const row=document.createElement('div');
+    row.style.display='flex';
+    row.style.justifyContent='space-between';
+    row.style.margin='8px 0';
+    const span=document.createElement('span');
+    span.textContent=txt;
+    const del=document.createElement('button');
+    del.textContent='Excluir';
+    del.onclick=()=>{ el.remove(); row.remove(); };
+    row.appendChild(span); row.appendChild(del);
+    list.appendChild(row);
+  });
+}
+document.getElementById('floatSend').onclick=()=>{
+  collectItems();
+  document.getElementById('confirmPanel').style.display='flex';
+};
+document.getElementById('confirmSend').onclick=()=>{
+  const original=document.querySelector('button.send, #sendBtn, .sendKitchen');
+  if(original) original.click();
+  document.getElementById('confirmPanel').style.display='none';
+  alert('Pedido enviado à cozinha');
+};
+</script>
+
+
+<script>
+const myCart = [];
+
+function updateFloatCount(){
+  let total = myCart.reduce((a,b)=>a+b.qty,0);
+  let btn=document.getElementById('floatSend');
+  if(btn) btn.innerText = 'Enviar à cozinha ('+total+')';
+}
+
+function captureFromModal(){
+  const modal=document.querySelector('.modal, .popup, .dialog');
+  if(!modal) return null;
+  const nameEl=modal.querySelector('h3, .title, .name');
+  const qtyEl=modal.querySelector('#qv, #mqty, .qty, .quantity');
+  if(!nameEl || !qtyEl) return null;
+  let name=nameEl.innerText.trim();
+  let qty=parseInt(qtyEl.innerText)||1;
+  return {name,qty};
+}
+
+document.addEventListener('click',function(e){
+  const t=e.target;
+  if(!t) return;
+  const txt=(t.innerText||'').toLowerCase();
+
+  if(/adicionar|ok|confirmar/.test(txt)){
+    const item=captureFromModal();
+    if(item){
+      const found=myCart.find(i=>i.name===item.name);
+      if(found) found.qty+=item.qty;
+      else myCart.push(item);
+      updateFloatCount();
+    }
+  }
+});
+
+// rebuild confirm list
+function collectItems(){
+  const list=document.getElementById('confirmList');
+  list.innerHTML='';
+  if(myCart.length===0){ list.innerHTML='<em>Seu pedido está vazio</em>'; return;}
+  myCart.forEach((it,idx)=>{
+    const row=document.createElement('div');
+    row.style.display='flex';
+    row.style.justifyContent='space-between';
+    row.style.margin='8px 0';
+    const span=document.createElement('span');
+    span.textContent=it.qty+'x '+it.name;
+    const del=document.createElement('button');
+    del.textContent='Excluir';
+    del.onclick=()=>{ myCart.splice(idx,1); collectItems(); updateFloatCount(); };
+    row.appendChild(span); row.appendChild(del);
+    list.appendChild(row);
+  });
+}
+
+document.getElementById('floatSend').onclick=()=>{
+  collectItems();
+  document.getElementById('confirmPanel').style.display='flex';
+};
+
+document.getElementById('confirmSend').onclick=()=>{
+  myCart.length=0;
+  updateFloatCount();
+  document.getElementById('confirmPanel').style.display='none';
+  alert('Pedido enviado à cozinha');
+};
+</script>
+
+
+<script>
+let currentItemName=null;
+
+document.addEventListener('click',function(e){
+  const card=e.target.closest('.item, .card, .produto');
+  if(card){
+    const t=card.querySelector('b, .title, h3, h4');
+    if(t) currentItemName=t.innerText.trim();
+  }
+});
+
+function readQty(){
+  const q=document.querySelector('#qv, #mqty, .qty, .quantity');
+  if(!q) return 1;
+  const n=parseInt(q.innerText);
+  return isNaN(n)?1:n;
+}
+
+function addCaptured(){
+  if(!currentItemName) return;
+  const qty=readQty();
+  const found=myCart.find(i=>i.name===currentItemName);
+  if(found) found.qty+=qty;
+  else myCart.push({name:currentItemName,qty:qty});
+  updateFloatCount();
+  currentItemName=null;
+}
+
+document.addEventListener('click',function(e){
+  const txt=(e.target.innerText||'').toLowerCase();
+  if(/ok|confirmar|adicionar|fechar|✓/.test(txt)){
+    setTimeout(addCaptured,200);
+  }
+});
+</script>
+
+
+<script>
+let dsCart=[];let dsItem="";let dsQty=1;
+
+document.addEventListener('click',function(e){
+ const el=e.target.closest('.item, .card, .produto');
+ if(!el) return;
+ e.stopImmediatePropagation(); e.preventDefault();
+ dsItem=(el.innerText||'').trim().split('\n')[0];
+ dsQty=1;document.getElementById('ds_num').innerText=1;
+ document.getElementById('ds_title').innerText=dsItem;
+ document.getElementById('ds_modal').style.display='flex';
+},true);
+
+function dsChange(v){dsQty=Math.max(1,dsQty+v);document.getElementById('ds_num').innerText=dsQty;}
+function dsAdd(){
+ const f=dsCart.find(i=>i.name===dsItem);
+ if(f)f.qty+=dsQty;else dsCart.push({name:dsItem,qty:dsQty});
+ dsUpdate();document.getElementById('ds_modal').style.display='none';
+}
+function dsUpdate(){
+ const t=dsCart.reduce((a,b)=>a+b.qty,0);
+ const b=document.getElementById('ds_float');
+ b.style.display=t?'block':'none';b.innerText='Seu pedido ('+t+')';
+}
+document.getElementById('ds_float').onclick=function(){
+ const l=document.getElementById('ds_list');l.innerHTML='';
+ dsCart.forEach((it,i)=>{
+  const r=document.createElement('div');r.className='ds_row';
+  r.innerHTML='<span><b>'+it.qty+'x</b> '+it.name+'</span>';
+  const d=document.createElement('button');d.className='ds_del';d.innerText='Excluir';
+  d.onclick=()=>{dsCart.splice(i,1);dsUpdate();this.click();};
+  r.appendChild(d);l.appendChild(r);
+ });
+ document.getElementById('ds_review').style.display='flex';
+};
+
+function dsSend(){
+const params=new URLSearchParams(window.location.search);
+const mesa=params.get("mesa")||"Balcao";
+
+let texto="DANIEL SAN PRIME\n";
+texto+="Mesa: "+mesa+"\n----------------\n";
+
+dsCart.forEach(i=>{
+texto+=i.q+"x "+i.name+"\n";
+});
+
+fetch("http://192.168.15.119:9100",{method:"POST",body:texto});
+
+dsCart=[];
+dsUpdate();
+document.getElementById('ds_review').style.display='none';
+alert('Pedido enviado para cozinha');
+}
+
+document.getElementById('ds_modal').onclick=e=>{if(e.target.id==='ds_modal')e.target.style.display='none'}
+document.getElementById('ds_review').onclick=e=>{if(e.target.id==='ds_review')e.target.style.display='none'}
+</script>
+</html>
